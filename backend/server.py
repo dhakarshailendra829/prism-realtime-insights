@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS  # ← YE ADD KARO
+from flask_cors import CORS 
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -8,7 +8,7 @@ from core.data_adapters.data_fetcher import fetch_real_or_simulated_data
 from core.algorithms.processing_logic import apply_algorithm
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000", "http://127.0.0.1:3000"])  # ← YE 2 LINES ADD!
+CORS(app, origins=["http://localhost:3000", "http://127.0.0.1:3000"])  
 
 @app.route("/api/next", methods=["GET"])
 def api_next():
