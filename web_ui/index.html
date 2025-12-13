@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🚀 MODULUS - Algorithmic Insight Engine</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    
+  <canvas id="bg-wave-canvas"></canvas>
+
+  <div id="holographic-frame">
+
+      <header>
+        <div class="header-content">
+          <div>
+            <h1>🚀 MODULUS - ALGORITHMIC INSIGHT ENGINE</h1>
+            <p class="tagline">
+              Unified live stream analysis for anomalies, sentiment and attrition risk
+            </p>
+          </div>
+          <div class="connection-status">
+            <span id="conn_status">STATUS: OFFLINE</span>
+            <div class="conn-dot" id="conn_light"></div>
+          </div>
+        </div>
+      </header>
+    
+      <main>
+        <section class="layout">
+          <aside class="control-panel-sidebar">
+            <h2>⚙️ CONTROL PANEL</h2>
+
+            <button id="start-btn" class="btn btn-start">
+                <span class="icon">▶</span> START ANALYSIS
+            </button>
+            <button id="adjust-btn" class="btn btn-control">
+                <span class="icon">⚙️</span> ADJUST PARAMETERS
+            </button>
+            <button id="export-btn" class="btn btn-control">
+                <span class="icon">📤</span> EXPORT DATA
+            </button>
+
+
+            <div class="sub-panel">
+                <label class="field-label" for="domain-select">1. Select Domain Focus:</label>
+                <select id="domain-select">
+                  <option>IoT Sensors (Anomaly Detection)</option>
+                  <option>Server Metrics (Predictive)</option>
+                  <option>Social Media (Text Analysis)</option>
+                </select>
+
+                <div id="threshold-wrapper">
+                  <label class="field-label" for="threshold-slider">
+                    2. Anomaly Sensitivity (Tuning)
+                  </label>
+                  <input
+                    id="threshold-slider"
+                    type="range"
+                    min="-2"
+                    max="2"
+                    step="0.1"
+                    value="0"
+                  />
+                  <span id="threshold-value">0.0</span>
+                </div>
+            </div>
+            
+            <div class="system-logs-panel">
+                <h3>SYSTEM LOGS</h3>
+                <div class="log-body-placeholder">
+                    <p>
+                        INITIALIZING BOOT SEQUENCE. DOMAIN CHECK SUCCESSFUL. LOADING PREDICITIVE MODEL A3. LIVE STREAM PORT OPENED. ANALYSIS ENGINE READY. CURRENT THRESHOLD $T=0.0$. INITIATE STREAM TO BEGIN LOGGING.
+                    </p>
+                </div>
+                
+                <div class="sidebar-info">
+                  <span>Total Data Points:</span>
+                  <span id="total-count" class="highlight">0</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 1rem;">
+              <button id="stop-btn" class="btn btn-stop" disabled>
+                ⏹ STOP THE ANALYSIS
+              </button>
+            </div>
+            
+          </aside>
+
+          <section class="dashboard">
+            <div class="controls-row">
+              <div id="live-pill" class="live-pill live-pill--off">
+                OFFLINE: Ready to analyze. Click START to begin.
+              </div>
+            </div>
+
+            <div class="main-viz-grid">
+              
+                <section class="card chart-card">
+                    <div class="card-header">
+                        <h3>REAL-TIME DATA FLOW</h3>
+                        <p class="subtitle">Robust 3D Vector Generator</p>
+                    </div>
+                    <canvas id="realtime-chart" height="100"></canvas>
+                </section>
+
+                <section class="card metric-card">
+                    <div class="card-header">
+                        <h3>KEY METRIC: ALPHA SCORE</h3>
+                        <p class="subtitle">Realtime Anomaly Confidence</p>
+                    </div>
+                    <div class="metric-container">
+                        <div id="card-score" class="key-metric-value">0.000</div>
+                        <p class="status-item-title">CURRENT ANALYTICS RATING</p>
+                    </div>
+                </section>
+                
+                <section class="card status-card">
+                    <div class="card-header">
+                        <h3>ALGORITHM STATUS</h3>
+                        <p class="subtitle">Core Process State</p>
+                    </div>
+                    <div class="status-display">
+                        <span id="score-tag" class="status-tag normal">OPERATIONAL: STABLE</span>
+                        <p class="status-item-title">PROCESSING...</p>
+                    </div>
+                </section>
+
+                <section class="card alert-card">
+                    <div class="card-header">
+                        <h3>LATEST INSIGHT SUMMARY</h3>
+                    </div>
+                    <p id="alert-text" class="insight-text">
+                        Modulus Engine Ready. Click START to begin streaming.
+                    </p>
+                    <p id="alert-meta" class="insight-meta">
+                        Insight will appear here once the stream is live.
+                    </p>
+                </section>
+            </div>
+            
+            <section class="card log-table-card">
+                <div class="card-header">
+                    <h3>PROCESSED EVENT LOG</h3>
+                </div>
+                <div class="log-table-wrapper">
+                    <table class="log-table">
+                      <thead>
+                        <tr>
+                          <th>Time</th>
+                          <th>Value</th>
+                          <th>Insight</th>
+                          <th>Score</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody id="log-body">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+          </section>
+        </section>
+      </main>
+      
+  </div> <script src="js/app.js"></script>
+</body>
+</html>
