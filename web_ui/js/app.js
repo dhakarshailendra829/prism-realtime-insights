@@ -1,14 +1,9 @@
-// =================================================================
-// 🚀 MODULUS - Advanced Frontend JS (v2.0)
-// =================================================================
-
 const API_BASE = "http://127.0.0.1:8000";
 
 let isRunning = false;
 let timer = null;
 const history = [];
 
-// ✅ SAFE ELEMENT GETTING
 function getElements() {
     return {
         domainSelect: document.getElementById("domain-select"),
@@ -33,21 +28,16 @@ function getElements() {
 
 const elements = getElements();
 const DOMAIN_COLORS = {
-    'Server Metrics (Predictive)': { line: '#00CCFF', bg: 'rgba(0,204,255,0.15)' }, // Bright Cyan
-    'IoT Sensors (Anomaly Detection)': { line: '#00FF00', bg: 'rgba(0,255,0,0.15)' }, // Neon Green
-    'Social Media (Text Analysis)': { line: '#FF00FF', bg: 'rgba(255,0,255,0.15)' } // Magenta/Pink
+    'Server Metrics (Predictive)': { line: '#00CCFF', bg: 'rgba(0,204,255,0.15)' }, 
+    'IoT Sensors (Anomaly Detection)': { line: '#00FF00', bg: 'rgba(0,255,0,0.15)' }, 
+    'Social Media (Text Analysis)': { line: '#FF00FF', bg: 'rgba(255,0,255,0.15)' } 
 };
 
-// -----------------------------------------------------------
-// 🌊 NEW: Background Wave/Particle Animation Setup
-// This creates the dynamic, subtle background effect shown in the image.
-// -----------------------------------------------------------
 const bgCanvas = document.getElementById('bg-wave-canvas');
 const bgCtx = bgCanvas ? bgCanvas.getContext('2d') : null;
 let waves = [];
 
 if (bgCanvas && bgCtx) {
-    // Resize Canvas to window size
     bgCanvas.width = window.innerWidth;
     bgCanvas.height = window.innerHeight;
     window.addEventListener('resize', () => {
@@ -55,7 +45,6 @@ if (bgCanvas && bgCtx) {
         bgCanvas.height = window.innerHeight;
     });
 
-    // Particle Class for the background "data flow" look
     class Particle {
         constructor(x, y, radius, color) {
             this.x = x;
@@ -76,7 +65,6 @@ if (bgCanvas && bgCtx) {
         }
 
         update() {
-            // Keep particles within bounds by reversing direction
             if (this.x + this.radius > bgCanvas.width || this.x - this.radius < 0) {
                 this.velocity.x = -this.velocity.x;
             }
@@ -91,7 +79,7 @@ if (bgCanvas && bgCtx) {
     }
 
     const PARTICLE_COUNT = 70;
-    const PARTICLE_COLOR = 'rgba(0, 204, 255, 0.4)'; // Semi-transparent Cyan
+    const PARTICLE_COLOR = 'rgba(0, 204, 255, 0.52)'; 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
         const x = Math.random() * bgCanvas.width;
         const y = Math.random() * bgCanvas.height;
@@ -99,11 +87,9 @@ if (bgCanvas && bgCtx) {
         waves.push(new Particle(x, y, radius, PARTICLE_COLOR));
     }
 
-    // Animation Loop
     function animateBackground() {
         requestAnimationFrame(animateBackground);
-        // Clear the canvas with a slight opacity for a subtle trailing effect
-        bgCtx.fillStyle = 'rgba(10, 10, 10, 0.05)'; 
+        bgCtx.fillStyle = 'rgba(10, 10, 10, 0.12)'; 
         bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height); 
 
         waves.forEach(wave => {
@@ -113,9 +99,7 @@ if (bgCanvas && bgCtx) {
 
     animateBackground();
 }
-// -----------------------------------------------------------
 
-// ✅ SAFE EVENT LISTENERS (UNCHANGED)
 if (elements.thresholdSlider) {
     elements.thresholdSlider.addEventListener("input", () => {
         if (elements.thresholdValue) {
@@ -124,7 +108,6 @@ if (elements.thresholdSlider) {
     });
 }
 
-// ✅ CHART INIT (Aesthetics Updated)
 let realtimeChart = null;
 const canvas = document.getElementById("realtime-chart");
 if (canvas) {
@@ -134,8 +117,8 @@ if (canvas) {
         datasets: [{
             label: "Value",
             data: [],
-            borderColor: '#00CCFF', // Updated to Bright Cyan
-            backgroundColor: "rgba(0, 204, 255, 0.15)", // Updated to Bright Cyan
+            borderColor: '#00CCFF', 
+            backgroundColor: "rgba(0, 204, 255, 0.15)", 
             tension: 0.4,
             pointRadius: 1,
             borderWidth: 1.5
@@ -147,32 +130,28 @@ if (canvas) {
         scales: {
             x: { 
                 ticks: { color: "#00FF00", font: { size: 9}
-            }, // Neon Green Ticks
-                grid: { color: "rgba(0, 255, 0, 0.1)" } // Faint Neon Grid lines
+            }, 
+                grid: { color: "rgba(0, 255, 0, 0.1)" } 
             },
             y: { 
                 ticks: { color: "#00FF00", font: { size: 9}
-            }, // Neon Green Ticks
-                grid: { color: "rgba(0, 255, 0, 0.1)" } // Faint Neon Grid lines
+            }, 
+                grid: { color: "rgba(0, 255, 0, 0.1)" } 
             }
         },
         plugins: { 
             legend: { 
-                labels: { color: "#00CCFF", font: { size: 10}} // Bright Cyan Legend Label
+                labels: { color: "#00CCFF", font: { size: 10}} 
             } 
         },
         animation: { duration: 500, easing: 'linear' }
     };
-    // Ensure Chart.js is loaded globally (assume you have included the Chart.js script tag)
     if (typeof Chart !== 'undefined') {
         realtimeChart = new Chart(ctx, { type: "line", data: chartData, options: chartOptions });
     } else {
          console.error("Chart.js library not found. Please ensure the script is linked in index.html.");
     }
 }
-
-// --- REST OF THE LOGIC (nextPoint, updateUI, updateTable, updateRealtimeGraph, setLive, Event Listeners) ---
-// --- NO LOGIC CHANGES REQUIRED HERE, ONLY VISUAL CHANGES IN CSS ARE NEEDED ---
 
 async function nextPoint() {
     try {
@@ -213,7 +192,7 @@ async function nextPoint() {
         updateUI();
 
     } catch (error) {
-        console.error('❌ API Error:', error);
+        console.error('API Error:', error);
         if (elements.connStatus) elements.connStatus.textContent = "STATUS: ERROR";
         if (elements.connLight) elements.connLight.style.backgroundColor = "#ef4444";
     }
@@ -223,16 +202,13 @@ function updateUI() {
     const last = history[history.length - 1];
     if (!last) return;
 
-    // ✅ 100% SAFE
     if (elements.cardProcessed) elements.cardProcessed.textContent = history.length.toString();
     if (elements.cardLatest) {
         elements.cardLatest.textContent = typeof last.value === "number" ?
             `${last.value.toFixed(2)} ${last.unit}` : String(last.value);
     }
-    // Highlighting the Key Score with Neon Green (CSS will handle the font size and color)
     if (elements.cardScore) elements.cardScore.textContent = last.score.toFixed(3); 
 
-    // ✅ FIXED Status
     if (elements.scoreTag) {
         let statusText = "OPERATIONAL: STABLE";
         let statusClass = "normal";
@@ -246,14 +222,12 @@ function updateUI() {
         }
 
         elements.scoreTag.textContent = statusText;
-        // The CSS classes (normal, warning, anomaly) will control the glow color
         elements.scoreTag.className = `status-tag ${statusClass}`; 
     }
 
     if (elements.cardAttrition) {
-        // Updated text to match the image's status style
         elements.cardAttrition.innerHTML = last.attrition === 1 ?
-            `<span class="text-anomaly">🚨 HIGH ATTRITION RISK</span>` : `<span class="text-stable">✅ LOW RISK</span>`;
+            `<span class="text-anomaly">HIGH ATTRITION RISK</span>` : `<span class="text-stable">LOW RISK</span>`;
     }
 
     if (elements.alertText) elements.alertText.textContent = last.insight;
@@ -278,7 +252,7 @@ function updateTable() {
             <td class="${row.anomaly ? 'anomaly-value' : ''}">${typeof row.value === "number" ? row.value.toFixed(1) : row.value}</td>
             <td>${row.insight}</td>
             <td>${row.score.toFixed(2)}</td>
-            <td>${row.anomaly ? "🚨 ANOMALY" : "✅ NORMAL"}</td>
+            <td>${row.anomaly ? "ANOMALY" : "NORMAL"}</td>
         `;
         elements.logBody.appendChild(tr);
     }
@@ -308,15 +282,15 @@ function setLive(on) {
 
     if (on) {
         if (elements.connStatus) elements.connStatus.textContent = "STATUS: LIVE";
-        if (elements.connLight) elements.connLight.style.backgroundColor = "#00FF00"; // Neon Green
+        if (elements.connLight) elements.connLight.style.backgroundColor = "#00FF00"; 
         if (elements.livePill) {
             elements.livePill.classList.remove("live-pill--off");
             elements.livePill.classList.add("live-pill--on");
-            elements.livePill.textContent = "🔥 LIVE ANALYSIS";
+            elements.livePill.textContent = "LIVE ANALYSIS";
         }
     } else {
         if (elements.connStatus) elements.connStatus.textContent = "STATUS: OFFLINE";
-        if (elements.connLight) elements.connLight.style.backgroundColor = "#FF0000"; // Red
+        if (elements.connLight) elements.connLight.style.backgroundColor = "#FF0000"; 
         if (elements.livePill) {
             elements.livePill.classList.remove("live-pill--on");
             elements.livePill.classList.add("live-pill--off");
@@ -325,11 +299,10 @@ function setLive(on) {
     }
 }
 
-// ✅ SAFE EVENT LISTENERS
 if (elements.startBtn) {
     elements.startBtn.addEventListener("click", () => {
         if (isRunning) return;
-        console.log('🚀 MODULUS STARTED!');
+        console.log('MODULUS STARTED!');
         history.length = 0;
         if (realtimeChart) {
             realtimeChart.data.labels = [];
@@ -337,7 +310,6 @@ if (elements.startBtn) {
             realtimeChart.update();
         }
         setLive(true);
-        // Fast update rate (800ms) for real-time feel
         timer = setInterval(nextPoint, 800); 
     });
 }
@@ -345,24 +317,23 @@ if (elements.startBtn) {
 if (elements.stopBtn) {
     elements.stopBtn.addEventListener("click", () => {
         if (!isRunning) return;
-        console.log('⏹️ MODULUS STOPPED');
+        console.log('MODULUS STOPPED');
         clearInterval(timer);
         setLive(false);
     });
 }
 
-// ✅ SAFE LOAD
 window.addEventListener('load', async () => {
-    console.log('🌐 MODULUS Initializing...');
-    setLive(false); // Ensure initial state is offline
+    console.log('MODULUS Initializing...');
+    setLive(false); 
     try {
         const testRes = await fetch(`${API_BASE}/api/next?domain=IoT%20Sensors%20(Anomaly%20Detection)&threshold=0`);
         if (testRes.ok) {
-            console.log('✅ Backend connected!');
+            console.log('Backend connected!');
             if (elements.connStatus) elements.connStatus.textContent = "STATUS: READY";
-            if (elements.connLight) elements.connLight.style.backgroundColor = "#00CCFF"; // Bright Cyan Ready State
+            if (elements.connLight) elements.connLight.style.backgroundColor = "#00CCFF"; 
         }
     } catch (e) {
-        console.error('❌ Backend error:', e);
+        console.error('Backend error:', e);
     }
 });

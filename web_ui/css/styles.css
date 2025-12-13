@@ -1,51 +1,33 @@
-/* =================================================================
-// 🚀 MODULUS - Advanced Holographic Styles
-// ================================================================= */
-
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto+Mono:wght@400;700&display=swap');
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* 1. Monospace Font for Tech Look */
     font-family: 'Roboto Mono', monospace, system-ui, sans-serif; 
 }
 
-/* 2. Color Palette Shift: Neon Cyan/Green */
 :root {
-    /* Base Colors */
-    --bg-primary-dark: #070a14; /* Deep, near-black blue */
-    --bg-surface: #0f1523; /* Darker card background */
-    --text-primary: #00FFC2; /* Bright Neon Cyan/Green */
-    --text-secondary: #8892b0; /* Light Greyish Blue */
-
-    /* Holographic/Glass Effects */
-    --holo-bg: rgba(15, 25, 40, 0.4); /* Very transparent, deep blue */
-    --holo-border: rgba(0, 255, 255, 0.3); /* Cyan border */
-    --holo-glow: rgba(0, 255, 255, 0.7); /* Bright cyan glow */
-
-    /* Status Colors (Adapted for Neon) */
-    --neon-live: #00FF00; /* Neon Green (for LIVE status) */
-    --neon-alert: #FF3366; /* Neon Pink/Red (for ANOMALY) */
-    --neon-warning: #FFFF00; /* Neon Yellow */
+    
+    --bg-primary-dark: #070a14; 
+    --bg-surface: #111b31; 
+    --text-primary: #00FFC2; 
+    --text-secondary: #8892b0; 
+    --holo-bg: rgba(19, 33, 54, 0.4); 
+    --holo-border: rgba(25, 0, 255, 0.3); 
+    --holo-glow: rgba(0, 255, 255, 0.699); 
+    --neon-live: #00FF00; 
+    --neon-alert: #FF3366; 
+    --neon-warning: #FFFF00; 
 }
-
-/* =================================================================
-// BASE & BACKGROUND
-// ================================================================= */
 
 html, body {
     min-height: 100vh;
     background-color: var(--bg-primary-dark);
     color: var(--text-secondary);
     overflow-x: hidden;
-    /* Optional: Hide scrollbar for a cleaner look */
     scrollbar-width: none; 
 }
 body::-webkit-scrollbar { display: none; }
-
-/* Background Canvas Placeholder (JS handles the animation) */
 #bg-wave-canvas {
     position: fixed;
     top: 0;
@@ -55,52 +37,38 @@ body::-webkit-scrollbar { display: none; }
     opacity: 0.2;
 }
 
-/* Moving Particle Background (If Canvas isn't used, this CSS will provide a subtle animated glow) */
 body::before {
-    content: none; /* Disabling the old CSS background from previous code */
+    content: none; 
 }
 
-/* =================================================================
-// HOLO FRAME & HEADER
-// ================================================================= */
-
-/* 3. The main holographic screen container */
 #holographic-frame {
     max-width: 1500px;
     margin: 30px auto;
     padding: 10px;
-    
-    /* Holo Effect */
     background: var(--holo-bg);
     border: 1px solid var(--holo-border);
     border-radius: 20px;
-    backdrop-filter: blur(8px); /* Key to the glass look */
-    
-    /* Subtle Outer Glow */
+    backdrop-filter: blur(8px); 
     box-shadow: 
-        0 0 50px var(--holo-glow), /* Main Glow */
-        0 0 100px rgba(0, 255, 255, 0.2); /* Wider Halo */
-    
+        0 0 50px var(--holo-glow), 
+        0 0 100px rgba(0, 255, 255, 0.2); 
     position: relative;
-    z-index: 1; /* Ensure content is above background */
+    z-index: 1; 
 }
 
 
 header {
-    background: transparent; /* Background handled by #holographic-frame */
+    background: transparent; 
     box-shadow: none;
     padding: 1rem 2rem 0.5rem;
-    position: static; /* No sticky header needed inside the framed dashboard */
+    position: static; 
     border-bottom: 1px solid rgba(0, 255, 255, 0.1);
 }
 
 header h1 {
     font-size: 2.2rem;
     font-weight: 800;
-    /* Use Orbitron for the main Title */
     font-family: 'Orbitron', sans-serif; 
-    
-    /* Neon Text Gradient */
     background: linear-gradient(45deg, #00CCFF, #00FFC2, #FFFFFF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -114,34 +82,28 @@ header h1 {
     margin-top: 0;
 }
 
-/* Connection Status */
 .connection-status {
     border: 1px solid var(--holo-border);
     background: rgba(0, 0, 0, 0.3);
     color: var(--text-primary);
-    animation: none; /* Removing redundant animation */
+    animation: none; 
 }
 .conn-dot {
     animation: none;
-    box-shadow: 0 0 5px var(--neon-live); /* Simple glow */
+    box-shadow: 0 0 5px var(--neon-live); 
 }
 
-/* =================================================================
-// LAYOUT & CONTAINERS
-// ================================================================= */
-
 main {
-    max-width: none; /* Let the holographic-frame control the width */
+    max-width: none; 
     padding: 1rem;
 }
 
 .layout {
-    grid-template-columns: 280px minmax(0, 1fr); /* Slightly narrower sidebar */
+    grid-template-columns: 280px minmax(0, 1fr); 
     gap: 1rem;
 }
 
-/* Sidebar - Control Panel */
-.control-panel-sidebar { /* Updated class name */
+.control-panel-sidebar { 
     background: var(--bg-surface);
     border: 1px solid var(--holo-border);
     border-radius: 10px;
@@ -164,7 +126,6 @@ main {
     border-top: 1px dashed rgba(0, 255, 255, 0.1);
 }
 
-/* System Logs Panel */
 .system-logs-panel h3 {
     color: var(--neon-live);
     margin-top: 1.5rem;
@@ -174,14 +135,13 @@ main {
 .log-body-placeholder {
     height: 120px;
     overflow: hidden;
-    border: 1px solid rgba(0, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.199);
     background: rgba(0, 0, 0, 0.2);
     padding: 0.5rem;
     font-size: 0.75rem;
     line-height: 1.2;
 }
 
-/* Input/Select Styling */
 select, input[type="range"] {
     width: 100%;
     background: var(--bg-surface);
@@ -196,10 +156,6 @@ select, input[type="range"] {
     color: var(--neon-live);
     font-weight: 700;
 }
-
-/* =================================================================
-// BUTTONS (CONTROL PANEL)
-// ================================================================= */
 
 .btn {
     width: 100%;
@@ -216,7 +172,6 @@ select, input[type="range"] {
 }
 
 .btn-start {
-    /* Bright, primary action button */
     background: #00CCFF;
     color: var(--bg-primary-dark);
     box-shadow: 0 0 15px rgba(0, 204, 255, 0.8);
@@ -235,20 +190,14 @@ select, input[type="range"] {
     color: var(--neon-alert);
 }
 
-/* =================================================================
-// CARDS & DASHBOARD GRID
-// ================================================================= */
-
 .card {
     background: var(--bg-surface);
     border: 1px solid var(--holo-border);
     border-radius: 10px;
     padding: 1.2rem;
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.1); /* Subtle internal card glow */
-    backdrop-filter: blur(3px); /* Less blur inside cards */
+    box-shadow: 0 0 15px rgba(5, 101, 101, 0.774); 
+    backdrop-filter: blur(3px); 
     transition: box-shadow 0.3s ease;
-    
-    /* Remove redundant card hover animation */
     transform: none; 
 }
 .card:hover {
@@ -268,39 +217,33 @@ select, input[type="range"] {
     margin-top: 0.2rem;
 }
 
-/* 4. Dashboard Grid Layout (Matching the Image Structure) */
 .main-viz-grid {
     display: grid;
-    /* Two columns: 60% wide viz, 40% metrics/status */
     grid-template-columns: 2fr 1fr; 
-    grid-template-rows: auto auto; /* Two rows */
+    grid-template-rows: auto auto; 
     gap: 1rem;
     margin-bottom: 1rem;
 }
 
 .chart-card { 
     grid-area: 1 / 1 / 2 / 2; 
-    /* ✅ FIX: Fixed Height - अब यह 350px से नीचे नहीं धकेलेगा */
     height: 350px; 
     display: flex;
     flex-direction: column;
-} /* Top-Left (Chart) */
-.metric-card { grid-area: 1 / 2 / 2 / 3; } /* Top-Right (Key Metric) */
-.status-card { grid-area: 2 / 2 / 3 / 3; } /* Bottom-Right (Algorithm Status) */
-.alert-card { grid-area: 2 / 1 / 3 / 2; } /* Bottom-Left (Insight/Alert) */
+} 
+.metric-card { grid-area: 1 / 2 / 2 / 3; } 
+.status-card { grid-area: 2 / 2 / 3 / 3; } 
+.alert-card { grid-area: 2 / 1 / 3 / 2; } 
 
-
-/* 5. Key Metric Visualization */
 .metric-container {
     text-align: center;
     padding-top: 1rem;
 }
 .key-metric-value {
-    /* Large, glowing font for the score */
     font-family: 'Orbitron', sans-serif; 
     font-size: 4rem; 
     font-weight: 900;
-    color: var(--neon-live); /* Neon Green/Yellow */
+    color: var(--neon-live); 
     text-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
     line-height: 1;
 }
@@ -309,13 +252,11 @@ select, input[type="range"] {
     padding-top: 1rem;
 }
 .status-display .status-tag {
-    /* Status tags placed prominently */
     display: block;
     text-align: center;
     margin-bottom: 0.5rem;
 }
 
-/* Alert/Insight Card Text */
 .insight-text {
     color: var(--text-primary);
     font-size: 1rem;
@@ -328,19 +269,14 @@ select, input[type="range"] {
     margin-top: 0.5rem;
 }
 
-/* =================================================================
-// CHART & LOGS
-// ================================================================= */
-
 #realtime-chart {
     flex-grow: 1; 
     height: 100% !important; 
     padding: 0;
     background: transparent;
 }
-/* Table */
 .log-table-card {
-    grid-column: 1 / span 2; /* Full width below the main grid */
+    grid-column: 1 / span 2; 
 }
 .log-table-wrapper {
     max-height: 250px;
@@ -352,25 +288,24 @@ select, input[type="range"] {
     font-size: 0.75rem;
 }
 .log-table th {
-    background: rgba(0, 255, 255, 0.05);
+    background: rgba(6, 137, 137, 0.316);
     color: var(--text-primary);
     position: sticky;
     top: 0;
     z-index: 2;
 }
 .log-table td {
-    border-bottom: 1px solid rgba(0, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.271);
     padding: 0.6rem 0.8rem;
 }
 .log-table tbody tr:hover {
-    background: rgba(0, 255, 255, 0.05);
+    background: rgba(0, 255, 255, 0.151);
 }
 
-/* Status Tags (Applied to elements in app.js updateUI) */
 .status-tag.normal {
-    background: rgba(0, 255, 0, 0.1);
+    background: rgba(9, 149, 9, 0.749);
     color: var(--neon-live);
-    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.938);
 }
 .status-tag.anomaly {
     background: rgba(255, 51, 102, 0.15);
@@ -384,7 +319,6 @@ select, input[type="range"] {
     50% { transform: scale(1.02); opacity: 0.9; }
 }
 
-/* Live Pill */
 .live-pill {
     animation: none;
     border: none;
@@ -401,29 +335,24 @@ select, input[type="range"] {
     box-shadow: 0 0 10px var(--neon-alert);
 }
 
-/* =================================================================
-// RESPONSIVE
-// ================================================================= */
-
 @media (max-width: 1100px) {
     .layout { 
         grid-template-columns: 1fr; 
         padding-top: 1rem;
     }
     .main-viz-grid {
-        grid-template-columns: 1fr 1fr; /* Keep 2 columns if possible */
+        grid-template-columns: 1fr 1fr; 
         grid-template-rows: auto auto auto;
     }
-    /* Re-order elements for smaller screens */
-    .chart-card { grid-area: 1 / 1 / 2 / 3; } /* Chart full width top */
+    .chart-card { grid-area: 1 / 1 / 2 / 3; } 
     .metric-card { grid-area: 2 / 1 / 3 / 2; } 
     .status-card { grid-area: 2 / 2 / 3 / 3; } 
-    .alert-card { grid-area: 3 / 1 / 4 / 3; } /* Alert full width bottom */
+    .alert-card { grid-area: 3 / 1 / 4 / 3; } 
 }
 
 @media (max-width: 640px) {
     .main-viz-grid {
-        grid-template-columns: 1fr; /* Single column on very small screens */
+        grid-template-columns: 1fr; 
     }
     .metric-card, .status-card, .alert-card {
         grid-column: 1 / 2;
