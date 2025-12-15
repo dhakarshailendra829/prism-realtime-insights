@@ -127,10 +127,6 @@ Contributions are welcome!
 4. Open a Pull Request
 ---
 
-### License Link
-🔗 [https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT)
----
-
 ## 🔗 Repository
 GitHub: [https://github.com/dhakarshailendra829/prism-realtime-insights](https://github.com/dhakarshailendra829/prism-realtime-insights)
 ---
