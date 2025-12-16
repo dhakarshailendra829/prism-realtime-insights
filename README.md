@@ -134,5 +134,3 @@ GitHub: [https://github.com/dhakarshailendra829/prism-realtime-insights](https:/
 ## Acknowledgements
 Inspired by modern real‑time analytics platforms and open‑source dashboard projects.
 ---
-
-**If this project helped you, consider giving it a on GitHub.**
