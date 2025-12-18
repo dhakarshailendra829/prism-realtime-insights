@@ -179,12 +179,8 @@ Contributions are welcome.
 
 ## 👤 Author
 **Shailendra Dhakad**  
-Software Engineer • Machine Learning Engineer  
-Real-Time Systems • Data Engineering • Analytics Platforms  
+Software Engineer • Machine Learning Engineer • Data Engineering  
 ---
 
 ## Repository
 https://github.com/dhakarshailendra829/prism-realtime-insights
-
-
-⭐ *If this project adds value, consider starring the repository.*
