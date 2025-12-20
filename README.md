@@ -2,9 +2,14 @@
 
 <p align="center">
   <b>Unified Real-Time Analytics Dashboard for Modern Data Streams</b><br/>
-  <i>Live Monitoring • Actionable Insights • High-Signal Visualization</i>
 </p>
-
+<p align="center">
+  <img src="https://img.shields.io/badge/Real--Time-Analytics-blue" />
+  <img src="https://img.shields.io/badge/Streaming-Data%20Pipelines-brightgreen" />
+  <img src="https://img.shields.io/badge/Observability-System%20Monitoring-orange" />
+  <img src="https://img.shields.io/badge/Data-Visualization-purple" />
+  <img src="https://img.shields.io/badge/Decision-Intelligence-red" />
+</p>
 <p align="center">
   <a href="#-overview">Overview</a> •
   <a href="#-problem-statement">Problem</a> •
