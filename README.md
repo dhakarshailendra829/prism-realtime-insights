@@ -162,7 +162,26 @@ http://localhost:3000/index.html
 - Latest insight summary
 - Algorithm status & processed event log
 ---
+---
 
+## User Interface Visuals
+
+<p align="center"><b>Control Panel</b></p>
+<p align="center">
+  <img src="images/UI1.png" width="760" />
+</p>
+
+<p align="center"><b>Real-Time Data Flow</b></p>
+<p align="center">
+  <img src="images/UI2.png" width="760" />
+</p>
+
+<p align="center"><b>Summary of Data and Status</b></p>
+<p align="center">
+  <img src="images/UI3.png" width="760" />
+</p>
+
+---
 ## Future Roadmap
 
 - Advanced anomaly detection models
