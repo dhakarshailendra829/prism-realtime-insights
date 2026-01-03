@@ -152,7 +152,7 @@ def fetch_real_or_simulated_data(domain: str) -> Dict[str, Any]:
     
     return {'type': 'numeric_series', 'value': 75.0, 'unit': unit, 'timestamp': time.time()}
 if __name__ == "__main__":
-    print("Testing data fetch...")
+    print("Testing data fetching....")
     for domain in FILE_CONFIG:
         data = fetch_real_or_simulated_data(domain)
         print(f"{domain}: {data}")
