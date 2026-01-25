@@ -2,170 +2,165 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MODULUS - Algorithmic Insight Engine</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="css/styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    
+  
+  <div class="aether-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="glass-overlay"></div>
+  </div>
+
   <canvas id="bg-wave-canvas"></canvas>
 
-  <div id="holographic-frame">
-
-      <header>
+  <div id="holographic-frame" class="main-container">
+      <header class="glass-header">
         <div class="header-content">
-          <div>
-            <h1>MODULUS - ALGORITHMIC INSIGHT ENGINE</h1>
-            <p class="tagline">
-              Unified live stream analysis for anomalies, sentiment and attrition risk
-            </p>
+          <div class="brand">
+            <div class="logo-accent"></div>
+            <div>
+              <h1>AETHERLENS <span class="v-tag">v2.0</span></h1>
+              <p class="tagline">Unified live stream analysis for anomalies & sentiment</p>
+            </div>
           </div>
-          <div class="connection-status">
-            <span id="conn_status">STATUS: OFFLINE</span>
-            <div class="conn-dot" id="conn_light"></div>
+          <div class="connection-status-wrapper">
+            <div class="status-indicator">
+              <span id="conn_status">SYSTEM OFFLINE</span>
+              <div class="conn-dot" id="conn_light"></div>
+            </div>
           </div>
         </div>
       </header>
     
       <main>
-        <section class="layout">
-          <aside class="control-panel-sidebar">
-            <h2>CONTROL PANEL</h2>
+        <div class="layout-grid">
+          <aside class="control-panel-sidebar glass-panel">
+            <div class="panel-label">SYSTEM CONTROLS</div>
 
-            <button id="start-btn" class="btn btn-start">
-                <span class="icon"></span> START ANALYSIS
-            </button>
-            <button id="adjust-btn" class="btn btn-control">
-                <span class="icon"></span> ADJUST PARAMETERS
-            </button>
-            <button id="export-btn" class="btn btn-control">
-                <span class="icon"></span> EXPORT DATA
-            </button>
+            <div class="action-buttons">
+              <button id="start-btn" class="btn btn-start">
+                  <span class="pulse-ring"></span> START ENGINE
+              </button>
+              <button id="stop-btn" class="btn btn-stop" disabled>STOP ENGINE</button>
+            </div>
 
+            <div class="config-section">
+                <div class="input-group">
+                  <label class="field-label">Domain Focus</label>
+                  <select id="domain-select" class="custom-select">
+                    <option>IoT Sensors (Anomaly)</option>
+                    <option>Server Metrics (Predictive)</option>
+                    <option>Social Media (Sentiment)</option>
+                  </select>
+                </div>
 
-            <div class="sub-panel">
-                <label class="field-label" for="domain-select">1. Select Domain Focus:</label>
-                <select id="domain-select">
-                  <option>IoT Sensors (Anomaly Detection)</option>
-                  <option>Server Metrics (Predictive)</option>
-                  <option>Social Media (Text Analysis)</option>
-                </select>
-
-                <div id="threshold-wrapper">
-                  <label class="field-label" for="threshold-slider">
-                    2. Anomaly Sensitivity (Tuning)
-                  </label>
-                  <input
-                    id="threshold-slider"
-                    type="range"
-                    min="-2"
-                    max="2"
-                    step="0.1"
-                    value="0"
-                  />
-                  <span id="threshold-value">0.0</span>
+                <div id="threshold-wrapper" class="input-group">
+                  <label class="field-label">Sensitivity Tuning</label>
+                  <input id="threshold-slider" type="range" min="-2" max="2" step="0.1" value="0" />
+                  <div class="slider-val"><span id="threshold-value">0.0</span></div>
                 </div>
             </div>
             
-            <div class="system-logs-panel">
-                <h3>SYSTEM LOGS</h3>
-                <div class="log-body-placeholder">
-                    <p>
-                        INITIALIZING BOOT SEQUENCE. DOMAIN CHECK SUCCESSFUL. LOADING PREDICITIVE MODEL A3. LIVE STREAM PORT OPENED. ANALYSIS ENGINE READY. CURRENT THRESHOLD $T=0.0$. INITIATE STREAM TO BEGIN LOGGING.
-                    </p>
+            <div class="system-logs-container">
+                <div class="panel-label">RAW TELEMETRY</div>
+                <div class="log-viewer">
+                    <div class="log-body-placeholder font-mono">
+                      [BOOT] INITIALIZING AETHER_CORE...<br>
+                      [OK] NEURAL MESH ACTIVE.<br>
+                      [READY] AWAITING STREAM...
+                    </div>
                 </div>
                 
-                <div class="sidebar-info">
-                  <span>Total Data Points:</span>
+                <div class="stats-footer">
+                  <span>Data Points:</span>
                   <span id="total-count" class="highlight">0</span>
                 </div>
             </div>
-
-            <div style="margin-top: 1rem;">
-              <button id="stop-btn" class="btn btn-stop" disabled>
-                STOP THE ANALYSIS
-              </button>
-            </div>
-            
           </aside>
 
-          <section class="dashboard">
-            <div class="controls-row">
-              <div id="live-pill" class="live-pill live-pill--off">
-                OFFLINE: Ready to analyze. Click START to begin.
+          <section class="dashboard-area">
+            <div class="live-status-bar">
+              <div id="live-pill" class="status-pill status-pill--off">
+                <span class="pill-text">ENGINE STANDBY</span>
               </div>
             </div>
 
-            <div class="main-viz-grid">
-              
-                <section class="card chart-card">
+            <div class="viz-grid">
+                <section class="card glass-card chart-main">
                     <div class="card-header">
-                        <h3>REAL-TIME DATA FLOW</h3>
-                        <p class="subtitle">Robust 3D Vector Generator</p>
+                        <h3>REAL-TIME VECTOR FLOW</h3>
+                        <div class="live-badge">LIVE</div>
                     </div>
-                    <canvas id="realtime-chart" height="100"></canvas>
+                    <div class="chart-container">
+                      <canvas id="realtime-chart"></canvas>
+                    </div>
                 </section>
 
-                <section class="card metric-card">
+                <section class="card glass-card metric-small">
                     <div class="card-header">
-                        <h3>KEY METRIC: ALPHA SCORE</h3>
-                        <p class="subtitle">Realtime Anomaly Confidence</p>
+                        <h3>ALPHA SCORE</h3>
                     </div>
-                    <div class="metric-container">
-                        <div id="card-score" class="key-metric-value">0.000</div>
-                        <p class="status-item-title">CURRENT ANALYTICS RATING</p>
+                    <div class="metric-body">
+                        <div id="card-score" class="big-number font-mono">0.000</div>
+                        <div class="progress-bar-bg"><div class="progress-fill"></div></div>
                     </div>
                 </section>
                 
-                <section class="card status-card">
+                <section class="card glass-card metric-small">
                     <div class="card-header">
-                        <h3>ALGORITHM STATUS</h3>
-                        <p class="subtitle">Core Process State</p>
+                        <h3>CORE STATE</h3>
                     </div>
-                    <div class="status-display">
-                        <span id="score-tag" class="status-tag normal">OPERATIONAL: STABLE</span>
-                        <p class="status-item-title">PROCESSING...</p>
+                    <div class="status-body">
+                        <span id="score-tag" class="status-tag normal">STABLE</span>
+                        <p class="mini-label">Latency: 12ms</p>
                     </div>
                 </section>
 
-                <section class="card alert-card">
+                <section class="card glass-card insight-panel">
                     <div class="card-header">
-                        <h3>LATEST INSIGHT SUMMARY</h3>
+                        <h3>LATEST INSIGHT</h3>
                     </div>
-                    <p id="alert-text" class="insight-text">
-                        Modulus Engine Ready. Click START to begin streaming.
-                    </p>
-                    <p id="alert-meta" class="insight-meta">
-                        Insight will appear here once the stream is live.
-                    </p>
+                    <div class="insight-content">
+                      <p id="alert-text">System Ready. Awaiting data synchronization...</p>
+                      <p id="alert-meta" class="insight-meta">No anomalies detected.</p>
+                    </div>
                 </section>
             </div>
             
-            <section class="card log-table-card">
+            <section class="card glass-card table-section">
                 <div class="card-header">
-                    <h3>PROCESSED EVENT LOG</h3>
+                    <h3>EVENT STREAM LOG</h3>
                 </div>
-                <div class="log-table-wrapper">
-                    <table class="log-table">
+                <div class="table-scroll">
+                    <table class="modern-table">
                       <thead>
                         <tr>
-                          <th>Time</th>
-                          <th>Value</th>
-                          <th>Insight</th>
-                          <th>Score</th>
-                          <th>Status</th>
+                          <th>TIME</th>
+                          <th>VALUE</th>
+                          <th>INSIGHT</th>
+                          <th>SCORE</th>
+                          <th>STATUS</th>
                         </tr>
                       </thead>
-                      <tbody id="log-body">
-                        </tbody>
+                      <tbody id="log-body"></tbody>
                     </table>
                 </div>
             </section>
-
           </section>
-        </section>
+        </div>
       </main>
-      
-  </div> <script src="js/app.js"></script>
+  </div> 
+
+  <script src="js/app.js"></script>
 </body>
 </html>
