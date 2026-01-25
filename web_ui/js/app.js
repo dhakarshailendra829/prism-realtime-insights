@@ -4,7 +4,6 @@ let isRunning = false;
 let timer = null;
 const history = [];
 
-// Industry-grade color palette for the chart
 const THEME = {
     primary: '#38bdf8',
     secondary: '#818cf8',
@@ -35,13 +34,11 @@ function getElements() {
 
 const elements = getElements();
 
-// --- CHART INITIALIZATION ---
 let realtimeChart = null;
 const canvas = document.getElementById("realtime-chart");
 if (canvas) {
     const ctx = canvas.getContext("2d");
     
-    // Create a gradient for the chart area
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, 'rgba(56, 189, 248, 0.2)');
     gradient.addColorStop(1, 'rgba(56, 189, 248, 0)');
@@ -57,7 +54,7 @@ if (canvas) {
                 backgroundColor: gradient,
                 fill: true,
                 tension: 0.4,
-                pointRadius: 0, // Hidden for a cleaner look
+                pointRadius: 0, 
                 borderWidth: 2
             }]
         },
@@ -69,14 +66,13 @@ if (canvas) {
                 y: { ticks: { color: THEME.text }, grid: { color: THEME.grid } }
             },
             plugins: {
-                legend: { display: false } // Hide legend for cleaner UI
+                legend: { display: false } 
             },
             animation: { duration: 400, easing: 'easeOutQuart' }
         }
     });
 }
 
-// --- DATA LOGIC ---
 async function nextPoint() {
     try {
         const domain = elements.domainSelect.value;
@@ -110,11 +106,9 @@ async function nextPoint() {
 }
 
 function updateUI(last) {
-    // 1. Update Numbers
     elements.cardScore.textContent = last.score.toFixed(3);
     elements.totalCountEl.textContent = history.length;
     
-    // 2. Status Indicator
     if (last.anomaly) {
         elements.scoreTag.textContent = "ANOMALY DETECTED";
         elements.scoreTag.className = "status-tag anomaly";
@@ -123,14 +117,11 @@ function updateUI(last) {
         elements.scoreTag.className = "status-tag normal";
     }
 
-    // 3. Insight Text
     elements.alertText.textContent = last.insight;
     elements.alertMeta.textContent = `Timestamp: ${last.time} | Mode: Active Analysis`;
 
-    // 4. Update Table
     updateTable();
 
-    // 5. Update Chart
     if (realtimeChart) {
         realtimeChart.data.labels.push(last.time);
         realtimeChart.data.datasets[0].data.push(last.value);
@@ -155,7 +146,6 @@ function updateTable() {
     `).join('');
 }
 
-// --- CONTROLS ---
 function setLive(on) {
     isRunning = on;
     elements.startBtn.disabled = on;
@@ -185,7 +175,6 @@ elements.stopBtn.addEventListener("click", () => {
     setLive(false);
 });
 
-// Sync Threshold Slider
 elements.thresholdSlider.addEventListener("input", (e) => {
     elements.thresholdValue.textContent = Number(e.target.value).toFixed(1);
 });
